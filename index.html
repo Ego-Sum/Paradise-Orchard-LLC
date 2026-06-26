@@ -104,14 +104,13 @@
     h1 .accent { color: var(--coral-deep); font-style: italic; }
 
     .season {
-      display: inline-flex; align-items: center; gap: 9px;
-      font-size: 15px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
-      color: var(--leaf-deep); margin-bottom: 10px;
+      display: flex; justify-content: center; align-items: center; gap: 9px;
+      font-size: 13px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--leaf-deep); margin-bottom: 5px;
     }
     .season .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); }
 
-    .tagline { font-size: 17px; line-height: 1.5; color: var(--muted); max-width: 24em; margin: 0 auto 14px; }
-    .tagline .totext { color: var(--ink); font-weight: 600; }
+    .cta { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.4; margin: 11px auto 14px; }
 
     /* delivery / minimum-order highlight */
     .offer {
@@ -196,14 +195,14 @@
     </figure>
 
     <h1 class="anim d2">Palisade <span class="accent">Peaches</span></h1>
-    <p class="season anim d3"><span class="dot"></span>Colorado · In season</p>
-    <p class="tagline anim d4">Sweet, sun-ripened, just-picked.<br><span class="totext">Text us to order.</span></p>
+    <p class="season anim d3">Sweet, sun-ripened, just-picked.</p>
+    <p class="cta anim d4">Text us to order.</p>
 
     <div id="offer-wrap"></div>
     <div id="buttons"></div>
 
     <p class="footer anim d9">
-      <strong>Paradise Orchard LLC</strong> · Palisade, CO<br />
+      <strong>Paradise Orchard LLC</strong> · Vail, CO<br />
       <span id="footer-contact"></span>
     </p>
   </main>
