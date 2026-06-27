@@ -29,8 +29,11 @@
       // Email for the "Email us" button.
       email: "paradiseorchardllc@gmail.com",
 
-      // Text pre-filled into SMS and email. Buyer adds the quantity.
-      message: "Hi Paradise Orchard! I'd like to order peaches. Quantity: ",
+      // Text pre-filled into SMS and email — short, the buyer fills in the blanks.
+      message:
+        "Hi Paradise Orchard! I'd like to order peaches for delivery 🍑\n" +
+        "Grade: No.1 (eat fresh) / No.2 (canning)\n" +
+        "How many boxes? ",
       // Email subject (email only).
       emailSubject: "Peach order — Paradise Orchard",
 
@@ -74,16 +77,18 @@
       --radius:     20px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; background: var(--cream); height: 100%; overflow: hidden; }
+    html { -webkit-text-size-adjust: 100%; background: var(--cream); overscroll-behavior: none; }
     body {
       font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: var(--ink);
-      /* ФИКС-ЭКРАН по стабильной высоте svh (всегда-видимая, НЕ меняется при скрытии
-         адресной строки). Страница не скроллится => нет прыжков на iOS. Фото внутри
-         тянется под оставшееся место (см. .photo) и остаётся целым. */
-      height: 100vh;              /* fallback */
-      height: 100svh;
-      overflow: hidden;
+      /* Естественный скролл: страница хотя бы во весь экран (min-height по стабильному svh,
+         чтобы не было «прыжка» при скрытии адресной строки), при нехватке места — обычная
+         прокрутка. overscroll-behavior:none убирает «удар об низ» (рубер-бэнд). Фон обычный
+         (без fixed-слоёв — они на iOS дёргаются при скролле). */
+      min-height: 100vh;          /* fallback */
+      min-height: 100svh;
+      overflow-x: hidden;
+      overscroll-behavior: none;
       /* фон — ОБЫЧНЫЙ (без fixed-слоёв: они прыгают на iOS при инерционном скролле). */
       background:
         radial-gradient(240px 240px at 112% 4%, rgba(255,185,150,.50), transparent 70%),
@@ -98,14 +103,13 @@
 
     .card {
       position: relative; z-index: 1; width: 100%; max-width: 440px; text-align: center;
-      height: 100%; display: flex; flex-direction: column; justify-content: center;
+      margin: auto 0;  /* по центру когда влезает; при нехватке места — скролл-безопасно */
     }
 
     /* фото — НА ВСЮ ШИРИНУ и ЦЕЛИКОМ (без обрезки): пропорция коробки = пропорция кадра
-       (1000×718), кадр широкий → низкий по высоте → влезает без скролла.
-       flex: 0 1 auto — на очень маленьких экранах слегка ужмётся, но не обрежет бока. */
+       (1000×718), поэтому object-fit:cover ничего не режет. Высота естественная (не ужимается);
+       если контент длиннее экрана — обычный скролл, фото не страдает. */
     .photo {
-      flex: 0 1 auto; min-height: 0;
       width: 100%; aspect-ratio: 1000 / 718; margin: 0 auto 10px;
       border-radius: 22px; overflow: hidden;
       box-shadow: 0 22px 42px -20px rgba(176,64,24,.55);
