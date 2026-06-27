@@ -48,8 +48,6 @@
         landmark: "right by Costco",
         hours: "Thu–Sun · from July 2"
       },
-      // Show the "we deliver by the box" line.
-      delivery: true,
 
       // Which buttons to show (true / false).
       show: { sms: true, call: true, email: false },
@@ -82,6 +80,13 @@
       color: var(--ink);
       min-height: 100vh;          /* fallback */
       min-height: 100svh;         /* стабильная высота — не прыгает при скрытии адресной строки */
+      /* фон — ОБЫЧНЫЙ (едет со страницей одним слоем): на скролле не дёргается.
+         Никаких fixed-слоёв — на iOS они прыгают при инерционном скролле. */
+      background:
+        radial-gradient(240px 240px at 112% 4%, rgba(255,185,150,.50), transparent 70%),
+        radial-gradient(230px 230px at -12% 98%, rgba(255,214,168,.45), transparent 70%),
+        radial-gradient(135% 95% at 50% -8%, var(--blush) 0%, var(--cream-2) 34%, var(--cream) 70%);
+      background-repeat: no-repeat;
       display: flex; flex-direction: column; align-items: center;
       padding:
         calc(16px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right))
@@ -89,19 +94,10 @@
       overflow-x: hidden;
     }
 
-    /* фон — фиксированный слой за контентом: не перерисовывается на скролле (нет «дёрганья») */
-    body::before {
-      content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(240px 240px at 112% 4%, rgba(255,185,150,.50), transparent 70%),
-        radial-gradient(230px 230px at -12% 98%, rgba(255,214,168,.45), transparent 70%),
-        radial-gradient(135% 95% at 50% -8%, var(--blush) 0%, var(--cream-2) 34%, var(--cream) 70%);
-    }
-
     .card { position: relative; z-index: 1; width: 100%; max-width: 440px; margin: auto 0; text-align: center; }
 
     .photo {
-      width: 100%; margin: 0 auto 10px;
+      width: 100%; margin: 0 auto 7px;
       border-radius: 22px; overflow: hidden; aspect-ratio: 1000 / 842;
       box-shadow: 0 22px 42px -20px rgba(176,64,24,.55);
       border: 1px solid rgba(255,255,255,.55);
@@ -112,7 +108,7 @@
     h1 {
       font-family: "Fraunces", Georgia, serif; font-weight: 600;
       font-size: clamp(24px, 8vw, 48px); line-height: 1.05; letter-spacing: -0.5px; white-space: nowrap;
-      color: var(--ink); margin-bottom: 8px;
+      color: var(--ink); margin-bottom: 5px;
     }
     h1 .accent { color: var(--coral-deep); font-style: italic; }
 
@@ -123,31 +119,13 @@
     }
     .season .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); }
 
-    .cta { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.4; margin: 8px auto 12px; }
+    .cta { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.4; margin: 6px auto 10px; }
 
-    /* delivery / minimum-order highlight */
-    .offer {
-      display: inline-flex; align-items: center; gap: 10px;
-      max-width: 100%;
-      background: var(--white); border: 1.5px solid var(--blush); border-radius: 14px;
-      padding: 12px 17px; margin: 0 auto;
-      box-shadow: 0 10px 22px -14px rgba(176,64,24,.5);
-      font-size: 15.5px; line-height: 1.35; color: var(--ink); text-align: left;
-    }
-    .offer svg { width: 22px; height: 22px; flex: none; color: var(--leaf-deep); }
-    .offer b   { font-weight: 700; }
-    .offer .amt { font-weight: 800; color: var(--coral-deep); white-space: nowrap; }
-    .note {
-      display: flex; justify-content: center; align-items: center; gap: 6px;
-      margin-top: 8px; font-size: 13px; color: var(--muted);
-    }
-    .note svg { width: 16px; height: 16px; flex: none; color: var(--leaf-deep); }
-
-    #buttons { display: flex; flex-direction: column; gap: 10px; }
+    #buttons { display: flex; flex-direction: column; gap: 9px; }
     .btn {
       position: relative; overflow: hidden;
       display: flex; align-items: center; justify-content: center; gap: 11px;
-      min-height: 56px; padding: 0 22px;
+      min-height: 52px; padding: 0 22px;
       border: 1.5px solid transparent; border-radius: var(--radius);
       font-family: inherit; font-size: 17px; font-weight: 600; text-decoration: none;
       cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
@@ -181,13 +159,13 @@
     /* ---------- PRICES / PICKUP / DELIVERY ---------- */
     .menu {
       background: var(--white); border: 1.5px solid var(--blush); border-radius: 16px;
-      padding: 11px 15px; margin: 2px auto 8px; max-width: 100%;
+      padding: 10px 15px; margin: 2px auto 8px; max-width: 100%;
       box-shadow: 0 10px 22px -14px rgba(176,64,24,.5); text-align: left;
     }
     .menu-row {
       display: grid; grid-template-columns: 1.25fr .85fr .95fr; gap: 8px; align-items: center;
     }
-    .menu-row + .menu-row { margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--cream-2); }
+    .menu-row + .menu-row { margin-top: 7px; padding-top: 7px; border-top: 1px solid var(--cream-2); }
     .menu-head {
       font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
       color: var(--leaf-deep); margin-bottom: 9px; padding-bottom: 9px;
@@ -202,13 +180,13 @@
     .locate {
       display: flex; align-items: flex-start; gap: 8px; text-align: left;
       background: rgba(94,155,87,.10); border: 1px solid rgba(94,155,87,.30); border-radius: 13px;
-      padding: 11px 14px; margin: 0 auto 4px; font-size: 13.5px; line-height: 1.4; color: var(--ink);
+      padding: 9px 14px; margin: 0 auto 4px; font-size: 13.5px; line-height: 1.4; color: var(--ink);
     }
     .locate svg { width: 18px; height: 18px; flex: none; color: var(--leaf-deep); margin-top: 1px; }
     .locate b { font-weight: 700; }
     .locate .sub { color: var(--muted); }
 
-    .footer { margin-top: 10px; font-size: 13.5px; line-height: 1.6; color: var(--muted); }
+    .footer { margin-top: 7px; font-size: 13.5px; line-height: 1.6; color: var(--muted); }
     .footer strong { color: var(--ink); font-weight: 600; }
 
     /* ---------- MOTION (only if the user allows it) ---------- */
@@ -265,9 +243,8 @@
       function resolve(t){ return t==="sms"?smsHref : t==="call"?telHref : t==="email"?mailHref : t; }
       if (C.autoRedirect) { window.location.href = resolve(C.autoRedirect); return; }
 
-      // prices (grade x pickup/delivery) + pickup stand + delivery note
+      // prices (grade x pickup/delivery) + pickup stand
       if (C.offer) {
-        var truck = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>';
         var pin = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>';
 
         var rows = "";
@@ -288,12 +265,8 @@
             '<span><b>' + C.pickup.address + '</b> — ' + C.pickup.landmark +
             '<br><span class="sub">' + C.pickup.hours + '</span></span></div>' : '';
 
-        var deliverNote = C.delivery ?
-          '<div class="note anim d9">' + truck +
-            '<span>Delivery by the box · pickup by the pound at the stand</span></div>' : '';
-
         document.getElementById("offer-wrap").innerHTML =
-          '<div class="menu anim d9">' + head + rows + '</div>' + locate + deliverNote;
+          '<div class="menu anim d9">' + head + rows + '</div>' + locate;
       }
 
       var ICON = {
