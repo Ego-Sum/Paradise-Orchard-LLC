@@ -48,7 +48,7 @@
       // Pickup stand (by the pound). Set pickup:null to hide.
       pickup: {
         address: "432 W 5th St, Eagle, CO",
-        landmark: "right by Costco",
+        landmark: "",   // ориентир (опционально). Пусто — показывается только адрес.
         hours: "Thu–Sun · from July 2"
       },
 
@@ -110,7 +110,7 @@
        (1000×718), поэтому object-fit:cover ничего не режет. Высота естественная (не ужимается);
        если контент длиннее экрана — обычный скролл, фото не страдает. */
     .photo {
-      width: 100%; aspect-ratio: 1000 / 718; margin: 0 auto 10px;
+      width: 100%; aspect-ratio: 1000 / 718; margin: 0 auto 4px;
       border-radius: 22px; overflow: hidden;
       box-shadow: 0 22px 42px -20px rgba(176,64,24,.55);
       border: 1px solid rgba(255,255,255,.55);
@@ -162,10 +162,11 @@
       transform: skewX(-18deg);
     }
     .btn-call {
-      background: var(--white); color: var(--ink); border-color: var(--blush);
-      box-shadow: 0 8px 18px -12px rgba(176,64,24,.5);
+      background: linear-gradient(180deg, var(--leaf) 0%, var(--leaf-deep) 100%);
+      color: var(--white); border-color: transparent;
+      box-shadow: 0 12px 24px -10px rgba(67,123,62,.55);
     }
-    .btn-call:hover { border-color: var(--peach); }
+    .btn-call:hover { box-shadow: 0 16px 30px -10px rgba(67,123,62,.72); }
     .btn-email { background: transparent; color: var(--coral-deep); min-height: 48px; }
     .btn-email:hover { background: rgba(244,104,60,.08); }
 
@@ -179,16 +180,18 @@
       display: grid; grid-template-columns: 1.25fr .85fr .95fr; gap: 8px; align-items: center;
     }
     .menu-row + .menu-row { margin-top: 7px; padding-top: 7px; border-top: 1px solid var(--cream-2); }
+    /* шапка: все три заголовка ОДИНАКОВЫЕ (цвет/размер/начертание) */
     .menu-head {
-      font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
-      color: var(--leaf-deep); margin-bottom: 9px; padding-bottom: 9px;
+      font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+      color: var(--coral-deep); margin-bottom: 9px; padding-bottom: 9px;
       border-bottom: 1px solid var(--cream-2);
     }
-    .menu-head span:first-child { color: var(--muted); }
+    .menu-head span { color: var(--coral-deep); }
+    .menu-head .price { font-size: 12px; font-weight: 700; }  /* приравниваем к "Grade" */
     .menu .grade b { font-family: "Fraunces", Georgia, serif; font-size: 16px; color: var(--ink); display: block; }
-    .menu .grade em { font-style: normal; font-size: 11.5px; color: var(--muted); line-height: 1.2; display: block; margin-top: 1px; }
+    .menu .grade em { font-style: normal; font-size: 12.5px; color: var(--muted); line-height: 1.2; display: block; margin-top: 1px; }
     .menu .price { text-align: right; font-weight: 800; font-size: 15px; color: var(--coral-deep); white-space: nowrap; }
-    .menu .price i { display: block; font-style: normal; font-weight: 500; font-size: 10.5px; color: var(--muted); }
+    .menu .price i { display: block; font-style: normal; font-weight: 500; font-size: 12px; color: var(--muted); }
 
     .locate {
       display: flex; align-items: flex-start; gap: 8px; text-align: left;
@@ -269,9 +272,10 @@
           '<div class="menu-row menu-head"><span>Grade</span>' +
           '<span class="price">Pickup / lb</span><span class="price">Delivery</span></div>';
 
+        var land = (C.pickup && C.pickup.landmark) ? ' — ' + C.pickup.landmark : '';
         var locate = C.pickup ?
           '<div class="locate anim d9">' + pin +
-            '<span><b>' + C.pickup.address + '</b> — ' + C.pickup.landmark +
+            '<span><b>' + C.pickup.address + '</b>' + land +
             '<br><span class="sub">' + C.pickup.hours + '</span></span></div>' : '';
 
         document.getElementById("offer-wrap").innerHTML =
