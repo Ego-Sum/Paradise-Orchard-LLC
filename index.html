@@ -84,10 +84,9 @@
       min-height: 100svh;         /* стабильная высота — не прыгает при скрытии адресной строки */
       display: flex; flex-direction: column; align-items: center;
       padding:
-        calc(22px + env(safe-area-inset-top)) calc(22px + env(safe-area-inset-right))
-        calc(22px + env(safe-area-inset-bottom)) calc(22px + env(safe-area-inset-left));
+        calc(16px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right))
+        calc(16px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
       overflow-x: hidden;
-      overscroll-behavior: none;  /* убирает rubber-band «отскок» у края */
     }
 
     /* фон — фиксированный слой за контентом: не перерисовывается на скролле (нет «дёрганья») */
@@ -102,7 +101,7 @@
     .card { position: relative; z-index: 1; width: 100%; max-width: 440px; margin: auto 0; text-align: center; }
 
     .photo {
-      width: 100%; margin: 0 auto 10px;
+      width: 100%; margin: 0 auto 8px; max-height: 200px;
       border-radius: 22px; overflow: hidden; aspect-ratio: 1000 / 842;
       box-shadow: 0 22px 42px -20px rgba(176,64,24,.55);
       border: 1px solid rgba(255,255,255,.55);
@@ -124,7 +123,7 @@
     }
     .season .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); }
 
-    .cta { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.4; margin: 11px auto 14px; }
+    .cta { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.4; margin: 8px auto 12px; }
 
     /* delivery / minimum-order highlight */
     .offer {
@@ -140,7 +139,7 @@
     .offer .amt { font-weight: 800; color: var(--coral-deep); white-space: nowrap; }
     .note {
       display: flex; justify-content: center; align-items: center; gap: 6px;
-      margin-top: 10px; font-size: 13.5px; color: var(--muted);
+      margin-top: 8px; font-size: 13px; color: var(--muted);
     }
     .note svg { width: 16px; height: 16px; flex: none; color: var(--leaf-deep); }
 
@@ -182,7 +181,7 @@
     /* ---------- PRICES / PICKUP / DELIVERY ---------- */
     .menu {
       background: var(--white); border: 1.5px solid var(--blush); border-radius: 16px;
-      padding: 13px 15px; margin: 2px auto 10px; max-width: 100%;
+      padding: 11px 15px; margin: 2px auto 8px; max-width: 100%;
       box-shadow: 0 10px 22px -14px rgba(176,64,24,.5); text-align: left;
     }
     .menu-row {
@@ -209,7 +208,7 @@
     .locate b { font-weight: 700; }
     .locate .sub { color: var(--muted); }
 
-    .footer { margin-top: 14px; font-size: 13.5px; line-height: 1.6; color: var(--muted); }
+    .footer { margin-top: 10px; font-size: 13.5px; line-height: 1.6; color: var(--muted); }
     .footer strong { color: var(--ink); font-weight: 600; }
 
     /* ---------- MOTION (only if the user allows it) ---------- */
