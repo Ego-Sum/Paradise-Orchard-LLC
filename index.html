@@ -82,18 +82,21 @@
       color: var(--ink);
       min-height: 100vh;          /* fallback */
       min-height: 100svh;         /* стабильная высота — не прыгает при скрытии адресной строки */
-      /* мягкие тёплые блики прямо в градиенте (без blur/fixed — нет «дрожания» на мобильном) */
-      background:
-        radial-gradient(240px 240px at 112% 4%, rgba(255,185,150,.50), transparent 70%),
-        radial-gradient(230px 230px at -12% 98%, rgba(255,214,168,.45), transparent 70%),
-        radial-gradient(135% 95% at 50% -8%, var(--blush) 0%, var(--cream-2) 34%, var(--cream) 70%);
-      background-attachment: fixed;
       display: flex; flex-direction: column; align-items: center;
       padding:
         calc(22px + env(safe-area-inset-top)) calc(22px + env(safe-area-inset-right))
         calc(22px + env(safe-area-inset-bottom)) calc(22px + env(safe-area-inset-left));
       overflow-x: hidden;
       overscroll-behavior: none;  /* убирает rubber-band «отскок» у края */
+    }
+
+    /* фон — фиксированный слой за контентом: не перерисовывается на скролле (нет «дёрганья») */
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(240px 240px at 112% 4%, rgba(255,185,150,.50), transparent 70%),
+        radial-gradient(230px 230px at -12% 98%, rgba(255,214,168,.45), transparent 70%),
+        radial-gradient(135% 95% at 50% -8%, var(--blush) 0%, var(--cream-2) 34%, var(--cream) 70%);
     }
 
     .card { position: relative; z-index: 1; width: 100%; max-width: 440px; margin: auto 0; text-align: center; }
